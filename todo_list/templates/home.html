@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+ {% if all_items %}
+    <table class="table table-bordered">
+     {% for names in all_items %}
+        {% if names.completed %}
+           <tr class="table-secondary">
+           <td>{{ names.item }}</td>
+           <td><center>{{ names.completed}}</center></td>
+           <td><center>Delete</center></td>
+            </tr>
+        {% else %}
+           <tr>
+           <td>{{ names.item }}</td>
+           <td><center>{{ names.completed}}</center></td>
+           <td><center>Delete</center></td>
+            </tr>
+        {% endif %}
+
+      {% endfor %}
+     </table>
+  {% endif %}
+
+
+
+{% endblock %}
