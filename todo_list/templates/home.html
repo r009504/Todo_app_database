@@ -3,22 +3,35 @@
 
 {% block content %}
 
+{% if messages %}
 
+  {%  for message in messages %}
+       <div class="alert alert-success alert-dismisable" role="alert" >
+              <button class="close" data-dismiss="alert">
+                  <small><sup>X</sup></small>
+              </button>
+              {{ message }}
+       </div>
+
+  {% endfor %}
+{% endif %}
 
  {% if all_items %}
+ <br>
+ <br>
     <table class="table table-bordered">
      {% for names in all_items %}
         {% if names.completed %}
            <tr class="table-secondary">
-           <td>{{ names.item }}</td>
-           <td><center>{{ names.completed}}</center></td>
-           <td><center>Delete</center></td>
+           <td><a href ="{% url 'edit' names.id %}">{{ names.item }}</a></td>
+           <td><center><button type="button" class="btn btn-success"><center><a href = "{% url 'cross_on' names.id %}">Enable</a></center></button></td>
+           <td><center><a href ="{% url 'delete' names.id %}">Delete</a></center></td>
             </tr>
         {% else %}
            <tr>
-           <td>{{ names.item }}</td>
-           <td><center>{{ names.completed}}</center></td>
-           <td><center>Delete</center></td>
+            <td><a href ="{% url 'edit' names.id %}">{{ names.item }}</a></td>
+           <td><center><button type="button" class="btn btn-danger"><center><a href = "{% url 'cross_off' names.id %}">Disable</a></center></button></td>
+           <td><center><a href = "{% url 'delete' names.id %}">Delete</a></center></td>
             </tr>
         {% endif %}
 
